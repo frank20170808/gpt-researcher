@@ -1,6 +1,8 @@
 # Stage 1: Browser and build tools installation
 FROM python:3.11.4-slim-bullseye AS install-browser
 
+RUN sed -i 's|deb.debian.org|mirrors.tuna.tsinghua.edu.cn|g' /etc/apt/sources.list
+
 # Install Chromium, Chromedriver, Firefox, Geckodriver, and build tools in one layer
 RUN apt-get update \
     && apt-get install -y gnupg wget ca-certificates --no-install-recommends \

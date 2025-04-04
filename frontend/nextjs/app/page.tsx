@@ -39,6 +39,7 @@ export default function Home() {
   const [showScrollButton, setShowScrollButton] = useState(false);
   const mainContentRef = useRef<HTMLDivElement>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const currentApiUrl = '/api/ws';
 
   const { 
     history, 
@@ -52,7 +53,8 @@ export default function Home() {
     setAnswer,
     setLoading,
     setShowHumanFeedback,
-    setQuestionForHuman
+    setQuestionForHuman,
+    currentApiUrl
   );
 
   const handleFeedbackSubmit = (feedback: string | null) => {
