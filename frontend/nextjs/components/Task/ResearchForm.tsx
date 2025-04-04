@@ -3,7 +3,7 @@ import FileUpload from "../Settings/FileUpload";
 import ToneSelector from "../Settings/ToneSelector";
 import { useAnalytics } from "../../hooks/useAnalytics";
 import { CloseIcon } from '@chakra-ui/icons';
-import { ChatBoxSettings, Domain } from '@/types/data';
+import { ChatBoxSettings, Domain } from '../../types/data';
 
 interface ResearchFormProps {
   chatBoxSettings: ChatBoxSettings;
