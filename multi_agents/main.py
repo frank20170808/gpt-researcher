@@ -31,6 +31,8 @@ def open_task():
 async def run_research_task(query, websocket=None, stream_output=None, tone=Tone.Objective, headers=None):
     task = open_task()
     task["query"] = query
+    # 删除 model 字段，避免传递给 run_research_task()
+    task.pop("model", None)
 
     chief_editor = ChiefEditorAgent(task, websocket, stream_output, tone, headers)
     research_report = await chief_editor.run_research_task()
