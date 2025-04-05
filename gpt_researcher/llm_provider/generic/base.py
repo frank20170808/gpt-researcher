@@ -166,7 +166,21 @@ class GenericLLMProvider:
             from langchain_openai import ChatOpenAI
             from langchain_core.rate_limiters import InMemoryRateLimiter
 
-            rps = float(os.environ["OPENROUTER_LIMIT_RPS"]) if "OPENROUTER_LIMIT_RPS" in os.environ else 1.0
+            try:
+                # 获取环境变量并安全解析为浮点数
+                if "OPENROUTER_LIMIT_RPS" in os.environ:
+                    rps_str = os.environ["OPENROUTER_LIMIT_RPS"]
+                    # 移除任何可能的注释
+                    if '#' in rps_str:
+                        rps_str = rps_str.split('#')[0]
+                    # 清理并转换为浮点数
+                    rps = float(rps_str.strip())
+                else:
+                    rps = 1.0
+            except (ValueError, TypeError):
+                # 如果转换失败，使用默认值
+                print("Warning: Could not parse OPENROUTER_LIMIT_RPS, using default value 1.0")
+                rps = 1.0
             
             rate_limiter = InMemoryRateLimiter(
                 requests_per_second=rps,

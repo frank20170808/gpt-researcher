@@ -1,0 +1,20 @@
+---CLINE_RULES_START---
+[LAST_ACTION_STATE]
+last_action: "Memory Bank Initialized"
+current_phase: "Set-up/Maintenance"
+next_action: "Generate Main Dependency Tracker"
+next_phase: "Set-up/Maintenance"
+
+[CODE_ROOT_DIRECTORIES]
+- backend
+- evals
+- frontend
+- gpt_researcher
+- mcp-server
+- multi_agents
+- tests
+
+[LEARNING_JOURNAL]
+- Memory Bank initialized on 2025-04-05.
+- Identified code roots: backend, evals, frontend, gpt_researcher, mcp-server, multi_agents, tests.
+---CLINE_RULES_END---

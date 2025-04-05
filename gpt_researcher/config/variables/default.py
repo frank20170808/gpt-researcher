@@ -4,9 +4,9 @@ DEFAULT_CONFIG: BaseConfig = {
     "RETRIEVER": "tavily",
     "EMBEDDING": "openai:text-embedding-3-small",
     "SIMILARITY_THRESHOLD": 0.42,
-    "FAST_LLM": "openai:gpt-4o-mini",
-    "SMART_LLM": "openai:gpt-4o-2024-11-20",  # Has support for long responses (2k+ words).
-    "STRATEGIC_LLM": "openai:o3-mini",  # Can be used with gpt-o1 or gpt-o3
+    "FAST_LLM": "openrouter:google/gemini-2.0-flash-lite-001",
+    "SMART_LLM": "openrouter:google/gemini-2.0-flash-001",  # Has support for long responses (2k+ words).
+    "STRATEGIC_LLM": "openrouter:google/gemini-2.5-pro-exp-03-25",  # Can be used with powerful models
     "FAST_TOKEN_LIMIT": 2000,
     "SMART_TOKEN_LIMIT": 4000,
     "STRATEGIC_TOKEN_LIMIT": 4000,
