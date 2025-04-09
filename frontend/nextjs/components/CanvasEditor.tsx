@@ -16,12 +16,28 @@ import ReactFlow, {
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 
-const SimpleNode = ({ data }: any) => (
-  <div style={{ padding: 5, border: '1px solid #999', background: '#fff' }}>
-    <div>{data.label}</div>
-    <div style={{ fontSize: 10 }}>{data.id}</div>
-  </div>
-);
+const SimpleNode = ({ data }: any) => {
+  const colorMap: any = {
+    inputNode: '#e0f7fa',
+    webScrapeNode: '#fff3e0',
+    summarizeNode: '#e8f5e9',
+    reportNode: '#f3e5f5',
+  };
+  return (
+    <div style={{
+      padding: 8,
+      borderRadius: 6,
+      border: '2px solid #999',
+      background: colorMap[data.type] || '#fff',
+      boxShadow: '2px 2px 5px rgba(0,0,0,0.2)',
+      fontSize: 12,
+      cursor: 'pointer',
+    }}>
+      <strong>{data.label}</strong>
+      <div style={{ fontSize: 10, color: '#666' }}>{data.id}</div>
+    </div>
+  );
+};
 
 const nodeTypes = {
   inputNode: SimpleNode,
@@ -133,8 +149,27 @@ export default function CanvasEditor() {
     for (const node of nodes) {
       const params = node.data?.params || [];
       for (const param of params) {
-        if (param.required && !node.data[param.name]) {
+        const val = node.data[param.name];
+        if (param.required && !val) {
           alert(`节点${node.id}缺少必填参数${param.label || param.name}`);
+          return;
+        }
+        if (param.type === 'number') {
+          const num = Number(val);
+          if (isNaN(num) || (param.min !== undefined && num < param.min) || (param.max !== undefined && num > param.max)) {
+            alert(`节点${node.id}参数${param.label || param.name}超出范围`);
+            return;
+          }
+        }
+        if (param.pattern) {
+          const regex = new RegExp(param.pattern);
+          if (!regex.test(val)) {
+            alert(`节点${node.id}参数${param.label || param.name}格式不正确`);
+            return;
+          }
+        }
+        if (param.options && !param.options.includes(val)) {
+          alert(`节点${node.id}参数${param.label || param.name}不在可选范围`);
           return;
         }
       }
