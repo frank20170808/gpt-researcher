@@ -21,6 +21,7 @@ from backend.server.websocket_manager import run_agent
 from backend.utils import write_md_to_word, write_md_to_pdf
 from gpt_researcher.utils.logging_config import setup_research_logging
 from gpt_researcher.utils.enum import Tone
+from backend.server.workflow_api import router as workflow_router
 
 import logging
 
@@ -202,3 +203,4 @@ async def websocket_endpoint(websocket: WebSocket):
         await handle_websocket_communication(websocket, manager)
     except WebSocketDisconnect:
         await manager.disconnect(websocket)
+app.include_router(workflow_router)

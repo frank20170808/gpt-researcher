@@ -90,6 +90,19 @@ export default function ResearchForm({
       onSubmit={handleSubmit}
     >
       <div className="form-group">
+        <label htmlFor="task" className="agent_question">研究问题</label>
+        <textarea
+          id="task"
+          name="task"
+          value={task}
+          onChange={(e) => setTask(e.target.value)}
+          placeholder="请输入你的研究问题..."
+          rows={3}
+          className="form-control-static"
+          required
+        />
+      </div>
+      <div className="form-group">
         <label htmlFor="report_type" className="agent_question">
           Report Type{" "}
         </label>
